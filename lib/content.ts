@@ -38,24 +38,83 @@ export async function getContent(): Promise<ContentData> {
           .eq('id', CONTENT_ID)
           .single();
 
-        if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
-          console.error('Error fetching from Supabase:', error);
-        } else if (data) {
+        // PGRST116 = no rows returned (record doesn't exist yet)
+        if (error && error.code === 'PGRST116') {
+          console.log('No content found in Supabase, returning empty content');
           return {
-            profile: data.profile || { name: '', bio: '', avatar: '' },
-            socialLinks: data.social_links || [],
-            videos: data.videos || [],
-            products: data.products || [],
+            profile: { name: '', bio: '', avatar: '' },
+            socialLinks: [],
+            videos: [],
+            products: [],
           };
         }
+
+        if (error) {
+          console.error('Error fetching from Supabase:', error);
+          // If there's an error, still return empty content instead of falling back
+          return {
+            profile: { name: '', bio: '', avatar: '' },
+            socialLinks: [],
+            videos: [],
+            products: [],
+          };
+        }
+
+        // Return data from Supabase
+        if (data) {
+          // Parse JSON strings if they come as strings (Supabase sometimes returns JSONB as strings)
+          const parseJsonField = (field: any, defaultValue: any) => {
+            if (field === null || field === undefined) return defaultValue;
+            
+            // If it's already an object/array, return it
+            if (typeof field !== 'string') {
+              return field;
+            }
+            
+            // If it's a string, try to parse it
+            try {
+              const parsed = JSON.parse(field);
+              return parsed;
+            } catch (e) {
+              console.warn('Failed to parse JSON field:', e);
+              return defaultValue;
+            }
+          };
+
+          const profile = parseJsonField(data.profile, { name: '', bio: '', avatar: '' });
+          const socialLinks = parseJsonField(data.social_links, []);
+          const videos = parseJsonField(data.videos, []);
+          const products = parseJsonField(data.products, []);
+
+          return {
+            profile: profile,
+            socialLinks: socialLinks,
+            videos: videos,
+            products: products,
+          };
+        }
+
+        // If no data but no error, return empty
+        return {
+          profile: { name: '', bio: '', avatar: '' },
+          socialLinks: [],
+          videos: [],
+          products: [],
+        };
       }
     } catch (error) {
       console.error('Error reading from Supabase:', error);
-      // Fall through to file system
+      // If Supabase is configured but fails, return empty instead of falling back to file
+      return {
+        profile: { name: '', bio: '', avatar: '' },
+        socialLinks: [],
+        videos: [],
+        products: [],
+      };
     }
   }
 
-  // Fallback to file system (development)
+  // Fallback to file system (only if Supabase is NOT configured - development only)
   try {
     const fileContent = fs.readFileSync(CONTENT_FILE_PATH, 'utf-8');
     return JSON.parse(fileContent) as ContentData;
@@ -81,14 +140,15 @@ export async function saveContent(content: ContentData): Promise<void> {
     try {
       const supabase = getSupabaseClient();
       if (supabase) {
+        // Ensure data is properly formatted as JSONB
         const { error } = await supabase
           .from('content')
           .upsert({
             id: CONTENT_ID,
-            profile: content.profile,
-            social_links: content.socialLinks,
-            videos: content.videos,
-            products: content.products,
+            profile: typeof content.profile === 'string' ? JSON.parse(content.profile) : content.profile,
+            social_links: typeof content.socialLinks === 'string' ? JSON.parse(content.socialLinks) : content.socialLinks,
+            videos: typeof content.videos === 'string' ? JSON.parse(content.videos) : content.videos,
+            products: typeof content.products === 'string' ? JSON.parse(content.products) : content.products,
             updated_at: new Date().toISOString(),
           }, {
             onConflict: 'id'
