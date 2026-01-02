@@ -1,0 +1,60 @@
+{
+  "profile": {
+    "name": "ASHIRA",
+    "bio": "Bienvenido a mi página de enlaces",
+    "avatar": "/3.png"
+  },
+  "socialLinks": [
+    {
+      "id": "1",
+      "title": "WhatsApp",
+      "url": "https://wa.me/584124885623",
+      "icon": "whatsapp",
+      "order": 1
+    },
+    {
+      "id": "2",
+      "title": "Correo Electrónico",
+      "url": "mailto:ashirasoftware@gmail.com",
+      "icon": "email",
+      "order": 2
+    },
+    {
+      "id": "3",
+      "title": "Página Web",
+      "url": "https://ashira.click",
+      "icon": "website",
+      "order": 3
+    }
+  ],
+  "videos": [],
+  "products": [
+    {
+      "id": "1",
+      "title": "Consultoría y Asesoramiento",
+      "description": "Obtén 4 asesorías completamente gratuitas durante el mes de prueba para la capacitación integral en el software, tanto para el personal operativo como para especialistas. Optimiza el uso de la plataforma y maximiza la productividad de tu equipo con nuestro programa de formación especializada.",
+      "imageUrl": "",
+      "ctaText": "Solicitar Consultoría",
+      "ctaUrl": "https://wa.me/584124885623?text=Hola%2C%20estoy%20interesado%20en%20el%20servicio%20de%20Consultor%C3%ADa%20y%20Asesoramiento.%20Me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20detalles%20sobre%20las%204%20asesor%C3%ADas%20gratuitas%20del%20mes%20de%20prueba.",
+      "order": 1
+    },
+    {
+      "id": "2",
+      "title": "Soporte Técnico",
+      "description": "Brindamos soporte técnico especializado para resolver de forma inmediata cualquier inconveniente relacionado con el software. Nuestro equipo de expertos está disponible para garantizar la continuidad operativa y el óptimo funcionamiento de tu sistema.",
+      "imageUrl": "",
+      "ctaText": "Contactar Soporte",
+      "ctaUrl": "https://wa.me/584124885623?text=Hola%2C%20necesito%20asistencia%20con%20el%20Soporte%20T%C3%A9cnico.%20Tengo%20un%20problema%20que%20requiere%20soluci%C3%B3n%20inmediata.",
+      "order": 2
+    },
+    {
+      "id": "3",
+      "title": "Solicitudes y Encargos",
+      "description": "Gestionamos la comunicación directa con nuestros clientes para recopilar y analizar solicitudes de nuevos módulos o funcionalidades. Nos encargamos de implementar mejoras personalizadas que optimicen la gestión interna de especialistas y equipos de trabajo.",
+      "imageUrl": "",
+      "ctaText": "Solicitar Módulo",
+      "ctaUrl": "https://wa.me/584124885623?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Solicitudes%20o%20Encargos.%20Quisiera%20conversar%20sobre%20la%20implementaci%C3%B3n%20de%20un%20nuevo%20m%C3%B3dulo%20o%20funcionalidad.",
+      "order": 3
+    }
+  ]
+}
