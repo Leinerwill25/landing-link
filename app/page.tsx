@@ -7,9 +7,14 @@ import { ContentData } from '@/types';
 
 async function getContent(): Promise<ContentData> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/content`, {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+                   (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000');
+    const res = await fetch(`${baseUrl}/api/content`, {
       cache: 'no-store',
     });
+    if (!res.ok) {
+      throw new Error(`Failed to fetch: ${res.status}`);
+    }
     const data = await res.json();
     return data.data;
   } catch (error) {

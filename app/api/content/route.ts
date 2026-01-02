@@ -5,7 +5,7 @@ import { ContentData, ApiResponse } from '@/types';
 
 export async function GET() {
   try {
-    const content = getContent();
+    const content = await getContent();
     const response: ApiResponse<ContentData> = {
       success: true,
       data: content,
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(response, { status: 400 });
     }
 
-    saveContent(content);
+    await saveContent(content);
 
     const response: ApiResponse<ContentData> = {
       success: true,
@@ -54,9 +54,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error) {
     console.error('Error saving content:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to save content';
     const response: ApiResponse = {
       success: false,
-      error: 'Failed to save content',
+      error: errorMessage,
     };
     return NextResponse.json(response, { status: 500 });
   }
