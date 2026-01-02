@@ -63,7 +63,7 @@ export default async function Home() {
       }}>
         {/* Hero Section with Enhanced Design */}
         <section style={{ 
-          padding: '6rem 1.5rem 5rem',
+          padding: 'clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 1.5rem) clamp(3rem, 6vw, 5rem)',
           position: 'relative',
           overflow: 'hidden'
         }}>
@@ -122,15 +122,16 @@ export default async function Home() {
                   
                   {/* Main Avatar Container */}
                   <div style={{ 
-                    width: '200px', 
-                    height: '200px', 
+                    width: 'clamp(140px, 25vw, 200px)', 
+                    height: 'clamp(140px, 25vw, 200px)', 
                     borderRadius: '50%',
                     overflow: 'hidden',
-                    border: '8px solid var(--bg-primary)',
+                    border: 'clamp(4px, 1vw, 8px) solid var(--bg-primary)',
                     boxShadow: '0 25px 80px rgba(0, 102, 204, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 0 60px rgba(0, 102, 204, 0.1)',
                     position: 'relative',
                     background: 'var(--bg-primary)',
-                    transition: 'transform 0.3s ease'
+                    transition: 'transform 0.3s ease',
+                    margin: '0 auto'
                   }}>
                     <img
                       src={profile.avatar || '/3.png'}
@@ -146,20 +147,20 @@ export default async function Home() {
                   {/* Verification Badge */}
                   <div style={{
                     position: 'absolute',
-                    bottom: '12px',
-                    right: '12px',
-                    width: '48px',
-                    height: '48px',
+                    bottom: 'clamp(8px, 2vw, 12px)',
+                    right: 'clamp(8px, 2vw, 12px)',
+                    width: 'clamp(36px, 6vw, 48px)',
+                    height: 'clamp(36px, 6vw, 48px)',
                     background: 'linear-gradient(135deg, var(--secondary-500), var(--secondary-600))',
                     borderRadius: '50%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    border: '5px solid var(--bg-primary)',
+                    border: 'clamp(3px, 1vw, 5px) solid var(--bg-primary)',
                     boxShadow: '0 6px 20px rgba(0, 166, 81, 0.4), 0 0 0 2px rgba(0, 166, 81, 0.1)',
                     animation: 'scale-pulse 2s ease-in-out infinite'
                   }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" style={{ width: '22px', height: '22px' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" style={{ width: 'clamp(16px, 3vw, 22px)', height: 'clamp(16px, 3vw, 22px)' }}>
                       <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -186,14 +187,16 @@ export default async function Home() {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.625rem',
-                  padding: '0.625rem 1.5rem',
+                  gap: 'clamp(0.5rem, 1.5vw, 0.625rem)',
+                  padding: 'clamp(0.5rem, 1.5vw, 0.625rem) clamp(1rem, 3vw, 1.5rem)',
                   backgroundColor: 'var(--primary-50)',
                   borderRadius: 'var(--radius-full)',
-                  marginBottom: '2rem',
+                  marginBottom: 'clamp(1.5rem, 4vw, 2rem)',
                   border: '1px solid var(--primary-200)',
                   boxShadow: '0 2px 8px rgba(0, 102, 204, 0.1)',
-                  animationDelay: '0.2s'
+                  animationDelay: '0.2s',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center'
                 }}
               >
                 <div style={{
@@ -219,13 +222,14 @@ export default async function Home() {
               <p 
                 className="animate-slide-up"
                 style={{ 
-                  fontSize: 'clamp(1.125rem, 2.5vw, 1.375rem)',
+                  fontSize: 'clamp(1rem, 2.5vw, 1.375rem)',
                   color: 'var(--text-secondary)',
                   lineHeight: 1.75,
                   maxWidth: '800px',
-                  margin: '0 auto 3rem',
+                  margin: '0 auto clamp(2rem, 5vw, 3rem)',
                   fontWeight: 400,
-                  animationDelay: '0.3s'
+                  animationDelay: '0.3s',
+                  padding: '0 clamp(0.5rem, 2vw, 0)'
                 }}
               >
                 {profile.bio || 'Bienvenido a mi espacio profesional'}
@@ -236,24 +240,24 @@ export default async function Home() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '1rem',
-                margin: '2.5rem auto 0'
+                gap: 'clamp(0.75rem, 2vw, 1rem)',
+                margin: 'clamp(2rem, 5vw, 2.5rem) auto 0'
               }}>
                 <div style={{
-                  width: '60px',
+                  width: 'clamp(40px, 8vw, 60px)',
                   height: '2px',
                   background: 'linear-gradient(90deg, transparent, var(--primary-500))',
                   borderRadius: 'var(--radius-full)'
                 }} />
                 <div style={{
-                  width: '8px',
-                  height: '8px',
+                  width: 'clamp(6px, 1.5vw, 8px)',
+                  height: 'clamp(6px, 1.5vw, 8px)',
                   borderRadius: '50%',
                   backgroundColor: 'var(--primary-500)',
                   boxShadow: '0 0 10px var(--primary-500)'
                 }} />
                 <div style={{
-                  width: '60px',
+                  width: 'clamp(40px, 8vw, 60px)',
                   height: '2px',
                   background: 'linear-gradient(90deg, var(--primary-500), transparent)',
                   borderRadius: 'var(--radius-full)'
@@ -266,7 +270,7 @@ export default async function Home() {
         {/* Social Links Section */}
         {socialLinks && socialLinks.length > 0 && (
           <section style={{ 
-            padding: '5rem 1.5rem',
+            padding: 'clamp(3rem, 8vw, 5rem) clamp(1rem, 4vw, 1.5rem)',
             position: 'relative'
           }}>
             <div className="container">
@@ -290,14 +294,14 @@ export default async function Home() {
                     boxShadow: '0 2px 8px rgba(0, 102, 204, 0.08)'
                   }}>
                     <div style={{
-                      width: '8px',
-                      height: '8px',
+                      width: 'clamp(6px, 1.5vw, 8px)',
+                      height: 'clamp(6px, 1.5vw, 8px)',
                       borderRadius: '50%',
                       backgroundColor: 'var(--secondary-500)',
                       boxShadow: '0 0 8px var(--secondary-500)',
                       animation: 'pulse-dot 2s ease-in-out infinite'
                     }} />
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="var(--primary-600)" style={{ width: '1.125rem', height: '1.125rem' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="var(--primary-600)" style={{ width: 'clamp(1rem, 2vw, 1.125rem)', height: 'clamp(1rem, 2vw, 1.125rem)' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
                     </svg>
                     <span style={{
@@ -311,37 +315,41 @@ export default async function Home() {
                     </span>
                   </div>
                   <h2 style={{
-                    fontSize: 'clamp(2rem, 5vw, 2.75rem)',
+                    fontSize: 'clamp(1.75rem, 5vw, 2.75rem)',
                     fontWeight: 800,
                     color: 'var(--text-primary)',
-                    marginBottom: '1rem',
+                    marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
                     letterSpacing: '-0.03em',
-                    lineHeight: 1.2
+                    lineHeight: 1.2,
+                    padding: '0 clamp(0.5rem, 2vw, 0)'
                   }}>
                     Redes Sociales y Contacto
                   </h2>
                   <div style={{
-                    width: '60px',
+                    width: 'clamp(40px, 8vw, 60px)',
                     height: '3px',
                     background: 'linear-gradient(90deg, var(--primary-500), var(--accent-500))',
                     borderRadius: 'var(--radius-full)',
-                    margin: '0 auto 1.25rem',
+                    margin: '0 auto clamp(1rem, 2.5vw, 1.25rem)',
                     opacity: 0.8
                   }} />
                   <p style={{
-                    fontSize: '1.0625rem',
+                    fontSize: 'clamp(0.9375rem, 2vw, 1.0625rem)',
                     color: 'var(--text-secondary)',
                     maxWidth: '650px',
                     margin: '0 auto',
                     lineHeight: 1.7,
-                    fontWeight: 400
+                    fontWeight: 400,
+                    padding: '0 clamp(0.5rem, 2vw, 0)'
                   }}>
                     Mantente en contacto a través de estos canales profesionales
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2" style={{
-                  gap: '1.5rem'
+                <div className="grid grid-cols-1 md:grid-cols-2" style={{
+                  gap: 'clamp(1rem, 3vw, 1.5rem)',
+                  maxWidth: '1000px',
+                  margin: '0 auto'
                 }}>
                   {socialLinks
                     .sort((a, b) => a.order - b.order)
@@ -361,7 +369,7 @@ export default async function Home() {
         )}
 
         {/* Videos Section */}
-        <section style={{ padding: '5rem 1.5rem' }}>
+        <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1rem, 4vw, 1.5rem)' }}>
           <div className="container">
             <div 
               className="animate-slide-up"
@@ -394,26 +402,28 @@ export default async function Home() {
                 </span>
               </div>
               <h2 style={{
-                fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+                fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
                 fontWeight: 700,
                 color: 'var(--text-primary)',
-                marginBottom: '0.75rem'
+                marginBottom: 'clamp(0.5rem, 1.5vw, 0.75rem)',
+                padding: '0 clamp(0.5rem, 2vw, 0)'
               }}>
                 Recursos Educativos
               </h2>
               <p style={{
-                fontSize: '1rem',
+                fontSize: 'clamp(0.875rem, 2vw, 1rem)',
                 color: 'var(--text-secondary)',
                 maxWidth: '600px',
-                margin: '0 auto'
+                margin: '0 auto',
+                padding: '0 clamp(0.5rem, 2vw, 0)'
               }}>
                 Videos informativos y material audiovisual
               </p>
             </div>
             
             {videos && videos.length > 0 ? (
-              <div className="grid grid-cols-2" style={{
-                gap: '2rem',
+              <div className="grid grid-cols-1 md:grid-cols-2" style={{
+                gap: 'clamp(1.5rem, 4vw, 2rem)',
                 maxWidth: '1100px',
                 margin: '0 auto'
               }}>
@@ -440,9 +450,9 @@ export default async function Home() {
                 }}
               >
                 <div style={{
-                  width: '80px',
-                  height: '80px',
-                  margin: '0 auto 2rem',
+                  width: 'clamp(60px, 10vw, 80px)',
+                  height: 'clamp(60px, 10vw, 80px)',
+                  margin: '0 auto clamp(1.5rem, 4vw, 2rem)',
                   borderRadius: 'var(--radius-xl)',
                   background: 'linear-gradient(135deg, var(--bg-elevated), var(--bg-secondary))',
                   display: 'flex',
@@ -451,24 +461,26 @@ export default async function Home() {
                   border: '1px solid var(--border-color)',
                   boxShadow: 'var(--shadow-md)'
                 }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: '2.5rem', height: '2.5rem', color: 'var(--text-tertiary)' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: 'clamp(2rem, 4vw, 2.5rem)', height: 'clamp(2rem, 4vw, 2.5rem)', color: 'var(--text-tertiary)' }}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
                   </svg>
                 </div>
                 <h3 style={{
-                  fontSize: '1.5rem',
+                  fontSize: 'clamp(1.25rem, 3vw, 1.5rem)',
                   fontWeight: 700,
                   color: 'var(--text-primary)',
-                  marginBottom: '1rem',
-                  letterSpacing: '-0.02em'
+                  marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
+                  letterSpacing: '-0.02em',
+                  padding: '0 clamp(0.5rem, 2vw, 0)'
                 }}>
                   Actualmente No Hay Videos Educativos
                 </h3>
                 <p style={{
-                  fontSize: '1rem',
+                  fontSize: 'clamp(0.875rem, 2vw, 1rem)',
                   color: 'var(--text-secondary)',
                   lineHeight: 1.7,
-                  margin: 0
+                  margin: 0,
+                  padding: '0 clamp(0.5rem, 2vw, 0)'
                 }}>
                   Los recursos educativos estarán disponibles próximamente
                 </p>
@@ -479,7 +491,7 @@ export default async function Home() {
 
         {/* Services/Products Section */}
         {products && products.length > 0 && (
-          <section style={{ padding: '5rem 1.5rem 6rem' }}>
+          <section style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1rem, 4vw, 1.5rem) clamp(4rem, 8vw, 6rem)' }}>
             <div className="container">
               <div 
                 className="animate-slide-up"
@@ -511,25 +523,27 @@ export default async function Home() {
                   </span>
                 </div>
                 <h2 style={{
-                  fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+                  fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
                   fontWeight: 700,
                   color: 'var(--text-primary)',
-                  marginBottom: '0.75rem'
+                  marginBottom: 'clamp(0.5rem, 1.5vw, 0.75rem)',
+                  padding: '0 clamp(0.5rem, 2vw, 0)'
                 }}>
                   Mis Servicios Profesionales
                 </h2>
                 <p style={{
-                  fontSize: '1rem',
+                  fontSize: 'clamp(0.875rem, 2vw, 1rem)',
                   color: 'var(--text-secondary)',
                   maxWidth: '600px',
-                  margin: '0 auto'
+                  margin: '0 auto',
+                  padding: '0 clamp(0.5rem, 2vw, 0)'
                 }}>
                   Conoce las soluciones que ofrezco
                 </p>
               </div>
               
-              <div className="grid grid-cols-3" style={{
-                gap: '2rem',
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" style={{
+                gap: 'clamp(1.5rem, 4vw, 2rem)',
                 maxWidth: '1200px',
                 margin: '0 auto'
               }}>
@@ -553,8 +567,8 @@ export default async function Home() {
         <footer style={{ 
           backgroundColor: 'var(--bg-elevated)',
           borderTop: '1px solid var(--border-color)',
-          padding: '4rem 1.5rem 3rem',
-          marginTop: '4rem'
+          padding: 'clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 1.5rem) clamp(2rem, 5vw, 3rem)',
+          marginTop: 'clamp(2rem, 5vw, 4rem)'
         }}>
           <div className="container">
             <div style={{ 
@@ -564,33 +578,36 @@ export default async function Home() {
             }}>
               {profile.name && (
                 <h3 style={{
-                  fontSize: '1.125rem',
+                  fontSize: 'clamp(1rem, 2.5vw, 1.125rem)',
                   fontWeight: 600,
                   color: 'var(--text-primary)',
-                  marginBottom: '0.5rem'
+                  marginBottom: 'clamp(0.375rem, 1vw, 0.5rem)',
+                  padding: '0 clamp(0.5rem, 2vw, 0)'
                 }}>
                   {profile.name}
                 </h3>
               )}
               <p style={{ 
                 color: 'var(--text-tertiary)',
-                fontSize: '0.875rem',
-                marginBottom: '1rem'
+                fontSize: 'clamp(0.8125rem, 2vw, 0.875rem)',
+                marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
+                padding: '0 clamp(0.5rem, 2vw, 0)'
               }}>
                 Profesional dedicado al servicio de excelencia
               </p>
               <div style={{
-                width: '40px',
+                width: 'clamp(30px, 5vw, 40px)',
                 height: '2px',
                 background: 'var(--primary-500)',
-                margin: '1rem auto',
+                margin: 'clamp(0.75rem, 2vw, 1rem) auto',
                 borderRadius: 'var(--radius-full)',
                 opacity: 0.3
               }} />
               <p style={{ 
                 color: 'var(--text-tertiary)',
-                fontSize: '0.8125rem',
-                margin: 0
+                fontSize: 'clamp(0.75rem, 2vw, 0.8125rem)',
+                margin: 0,
+                padding: '0 clamp(0.5rem, 2vw, 0)'
               }}>
                 © {new Date().getFullYear()} {profile.name || 'Todos los derechos reservados'}
               </p>

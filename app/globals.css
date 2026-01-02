@@ -201,15 +201,27 @@ a:hover {
   color: var(--primary-600);
 }
 
-/* Professional Container */
+/* Professional Container - Enhanced Responsiveness */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--spacing-md);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
 }
 
 @media (min-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+@media (min-width: 1024px) {
   .container {
     padding: 0 var(--spacing-xl);
   }
@@ -384,14 +396,14 @@ a:hover {
   margin: var(--spacing-xl) 0;
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle Button - Responsive */
 .theme-toggle {
   position: fixed;
   top: 1rem;
   right: 1rem;
   z-index: 1000;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: clamp(2rem, 5vw, 2.5rem);
+  height: clamp(2rem, 5vw, 2.5rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -408,10 +420,18 @@ a:hover {
   box-shadow: var(--shadow-lg);
 }
 
-/* Professional Grid */
+@media (max-width: 640px) {
+  .theme-toggle {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* Professional Grid - Enhanced Responsiveness */
 .grid {
   display: grid;
   gap: var(--spacing-lg);
+  width: 100%;
 }
 
 .grid-cols-1 {
@@ -430,24 +450,95 @@ a:hover {
   grid-template-columns: repeat(4, 1fr);
 }
 
+/* Tablet and smaller desktop */
 @media (max-width: 1024px) {
   .grid-cols-4 {
     grid-template-columns: repeat(3, 1fr);
   }
+  
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid {
+    gap: var(--spacing-md);
+  }
 }
 
+/* Tablet portrait */
 @media (max-width: 768px) {
   .grid-cols-3,
   .grid-cols-4 {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  .grid {
+    gap: var(--spacing-md);
+  }
 }
 
-@media (max-width: 480px) {
+/* Mobile landscape and small tablets */
+@media (max-width: 640px) {
   .grid-cols-2,
   .grid-cols-3,
   .grid-cols-4 {
     grid-template-columns: 1fr;
+  }
+  
+  .grid {
+    gap: var(--spacing-md);
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .grid {
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Responsive Utility Classes */
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Responsive Typography */
+@media (max-width: 640px) {
+  h1 {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+  
+  h3 {
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+  }
+}
+
+/* Responsive Spacing */
+@media (max-width: 640px) {
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .section-header {
+    margin-bottom: var(--spacing-xl);
   }
 }
 

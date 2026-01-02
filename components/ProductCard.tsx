@@ -96,7 +96,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       )}
       
       <div style={{ 
-        padding: '2rem', 
+        padding: 'clamp(1.5rem, 4vw, 2rem)', 
         flex: 1, 
         display: 'flex', 
         flexDirection: 'column', 
@@ -108,18 +108,18 @@ export default function ProductCard({ product }: ProductCardProps) {
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
-          marginBottom: '1.25rem',
-          gap: '1rem'
+          marginBottom: 'clamp(1rem, 2.5vw, 1.25rem)',
+          gap: 'clamp(0.75rem, 2vw, 1rem)'
         }}>
           <div className="icon-wrapper" style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem',
+            gap: 'clamp(0.5rem, 1.5vw, 0.75rem)',
             flex: 1
           }}>
             <div className="icon-container" style={{
-              width: '52px',
-              height: '52px',
+              width: 'clamp(44px, 6vw, 52px)',
+              height: 'clamp(44px, 6vw, 52px)',
               borderRadius: 'var(--radius-lg)',
               background: 'var(--bg-elevated)',
               display: 'flex',
@@ -146,8 +146,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                 stroke="currentColor"
                 className="icon-svg"
                 style={{
-                  width: '1.5rem',
-                  height: '1.5rem',
+                  width: 'clamp(1.25rem, 2.5vw, 1.5rem)',
+                  height: 'clamp(1.25rem, 2.5vw, 1.5rem)',
                   color: 'var(--primary-600)',
                   transition: 'transform 0.4s ease',
                   position: 'relative',
@@ -193,10 +193,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Title Section */}
         <h3 className="product-title" style={{
-          fontSize: '1.375rem',
+          fontSize: 'clamp(1.125rem, 3vw, 1.375rem)',
           fontWeight: 800,
           color: 'var(--text-primary)',
-          marginBottom: '1rem',
+          marginBottom: 'clamp(0.75rem, 2vw, 1rem)',
           lineHeight: 1.2,
           letterSpacing: '-0.02em',
           transition: 'color 0.4s ease'
@@ -206,7 +206,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         
         {/* Divider */}
         <div className="title-divider" style={{
-          width: '40px',
+          width: 'clamp(30px, 5vw, 40px)',
           height: '2px',
           background: 'linear-gradient(90deg, var(--primary-500), transparent)',
           borderRadius: 'var(--radius-full)',
@@ -216,10 +216,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         
         {/* Description */}
         <p className="product-description" style={{
-          fontSize: '0.9375rem',
+          fontSize: 'clamp(0.875rem, 2vw, 0.9375rem)',
           color: 'var(--text-secondary)',
           lineHeight: 1.75,
-          marginBottom: '2rem',
+          marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
           flex: 1,
           fontWeight: 400
         }}>
@@ -361,6 +361,42 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         .product-card:active {
           transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+          .product-card {
+            min-height: auto;
+          }
+
+          .product-image-container {
+            height: 180px !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .product-card {
+            min-height: auto;
+          }
+
+          .product-image-container {
+            height: 160px !important;
+          }
+
+          .icon-container {
+            width: 40px !important;
+            height: 40px !important;
+          }
+
+          .icon-svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .product-image-container {
+            height: 140px !important;
+          }
         }
       `}</style>
     </div>

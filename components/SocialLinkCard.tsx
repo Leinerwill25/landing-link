@@ -291,26 +291,69 @@ export default function SocialLinkCard({ link }: SocialLinkCardProps) {
           transform: translateY(-3px);
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .professional-social-card {
-            padding: 1.5rem 1.75rem;
-            gap: 1.25rem;
-            minHeight: '90px';
+            padding: 1.25rem 1.5rem;
+            gap: 1rem;
+            min-height: auto;
           }
           
           .professional-social-card .icon-box {
-            width: 56px;
-            height: 56px;
+            width: 52px;
+            height: 52px;
+            font-size: 1.5rem;
           }
 
           .professional-social-card .icon-svg {
-            width: '24px';
-            height: '24px';
+            width: 24px;
+            height: 24px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .professional-social-card {
+            padding: 1.25rem 1.25rem;
+            gap: 1rem;
+            min-height: auto;
+          }
+          
+          .professional-social-card .icon-box {
+            width: 48px;
+            height: 48px;
+            font-size: 1.375rem;
+          }
+
+          .professional-social-card .icon-svg {
+            width: 22px;
+            height: 22px;
           }
 
           .professional-social-card .arrow-icon {
             width: 28px;
             height: 28px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .professional-social-card {
+            padding: 1rem 1.125rem;
+            gap: 0.875rem;
+          }
+          
+          .professional-social-card .icon-box {
+            width: 44px;
+            height: 44px;
+            font-size: 1.25rem;
+          }
+
+          .professional-social-card .icon-svg {
+            width: 20px;
+            height: 20px;
+          }
+
+          .professional-social-card .arrow-icon {
+            width: 24px;
+            height: 24px;
           }
         }
       `}</style>

@@ -70,7 +70,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
           className="video-iframe"
         />
       </div>
-      <div style={{ padding: '1.75rem' }}>
+      <div style={{ padding: 'clamp(1.25rem, 3vw, 1.75rem)' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -78,8 +78,8 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
           marginBottom: '0.75rem'
         }}>
           <div style={{
-            width: '40px',
-            height: '40px',
+            width: 'clamp(36px, 5vw, 40px)',
+            height: 'clamp(36px, 5vw, 40px)',
             borderRadius: 'var(--radius-md)',
             background: 'linear-gradient(135deg, var(--secondary-100), var(--secondary-50))',
             display: 'flex',
@@ -87,14 +87,14 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
             justifyContent: 'center',
             border: '1px solid var(--secondary-200)'
           }}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" style={{ width: '1.25rem', height: '1.25rem', color: 'var(--secondary-600)' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" style={{ width: 'clamp(1rem, 2vw, 1.25rem)', height: 'clamp(1rem, 2vw, 1.25rem)', color: 'var(--secondary-600)' }}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
             </svg>
           </div>
         </div>
         <h3 style={{
-          fontSize: '1.125rem',
+          fontSize: 'clamp(1rem, 2.5vw, 1.125rem)',
           fontWeight: 700,
           color: 'var(--text-primary)',
           marginBottom: '0.625rem',
@@ -105,7 +105,7 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
         </h3>
         {video.description && (
           <p style={{
-            fontSize: '0.9375rem',
+            fontSize: 'clamp(0.875rem, 2vw, 0.9375rem)',
             color: 'var(--text-secondary)',
             lineHeight: 1.7,
             margin: 0
@@ -122,6 +122,12 @@ export default function VideoPlayer({ video }: VideoPlayerProps) {
         
         .card:hover .video-iframe {
           transform: scale(1.02);
+        }
+
+        @media (max-width: 640px) {
+          .card {
+            margin: 0;
+          }
         }
       `}</style>
     </div>
