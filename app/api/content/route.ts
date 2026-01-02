@@ -5,24 +5,31 @@ import { ContentData, ApiResponse } from '@/types';
 
 export async function GET() {
   try {
+    console.log('API: Fetching content from Supabase...');
     const content = await getContent();
+    console.log('API: Content fetched successfully');
+    
     const response: ApiResponse<ContentData> = {
       success: true,
       data: content,
     };
+    
     // Add cache control headers to prevent stale data
     return NextResponse.json(response, {
       headers: {
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
         'Pragma': 'no-cache',
         'Expires': '0',
+        'CDN-Cache-Control': 'no-store',
+        'Vercel-CDN-Cache-Control': 'no-store',
       },
     });
   } catch (error) {
-    console.error('Error fetching content:', error);
+    console.error('API: Error fetching content:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to fetch content';
     const response: ApiResponse = {
       success: false,
-      error: 'Failed to fetch content',
+      error: errorMessage,
     };
     return NextResponse.json(response, { status: 500 });
   }
