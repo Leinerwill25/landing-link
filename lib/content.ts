@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { createClient } from '@supabase/supabase-js';
-import { ContentData } from '@/types';
+import { ContentData, SocialLink } from '@/types';
 
 const CONTENT_FILE_PATH = path.join(process.cwd(), 'data', 'content.json');
 const CONTENT_ID = '00000000-0000-0000-0000-000000000000';
@@ -105,7 +105,7 @@ export async function getContent(): Promise<ContentData> {
 
         console.log('[getContent] Parsed content - Profile:', profile.name, 'Links:', socialLinks.length, 'Videos:', videos.length, 'Products:', products.length);
         if (socialLinks.length > 0) {
-          console.log('[getContent] Social links details:', JSON.stringify(socialLinks.map(l => ({ id: l.id, title: l.title, url: l.url })), null, 2));
+          console.log('[getContent] Social links details:', JSON.stringify(socialLinks.map((l: SocialLink) => ({ id: l.id, title: l.title, url: l.url })), null, 2));
         } else {
           console.warn('[getContent] No social links found in data!');
         }
