@@ -11,10 +11,10 @@ async function getContent(): Promise<ContentData> {
     // This avoids an extra HTTP request and reads directly from Supabase
     const { getContent: getContentFromDB } = await import('@/lib/content');
     const content = await getContentFromDB();
-    console.log('Page: Content loaded from Supabase - Profile:', content.profile.name);
+    console.log('[Page] Content loaded from Supabase - Profile:', content.profile.name, 'Social Links:', content.socialLinks.length);
     return content;
   } catch (error) {
-    console.error('Page: Error fetching content directly:', error);
+    console.error('[Page] Error fetching content directly:', error);
     // Fallback: try API endpoint if direct import fails
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
@@ -28,15 +28,15 @@ async function getContent(): Promise<ContentData> {
       }
       const data = await res.json();
       if (data.success && data.data) {
-        console.log('Page: Content loaded from API fallback');
+        console.log('[Page] Content loaded from API fallback - Social Links:', data.data.socialLinks?.length || 0);
         return data.data;
       }
     } catch (apiError) {
-      console.error('Page: API fallback also failed:', apiError);
+      console.error('[Page] API fallback also failed:', apiError);
     }
     
     // Return empty content as last resort
-    console.warn('Page: Returning empty content as fallback');
+    console.warn('[Page] Returning empty content as fallback');
     return {
       profile: { name: '', bio: '', avatar: '' },
       socialLinks: [],
@@ -45,6 +45,10 @@ async function getContent(): Promise<ContentData> {
     };
   }
 }
+
+// Force dynamic rendering to always fetch fresh data
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function Home() {
   const content = await getContent();

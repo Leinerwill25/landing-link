@@ -3,11 +3,15 @@ import { isAuthenticated } from '@/lib/auth';
 import { getContent, saveContent } from '@/lib/content';
 import { ContentData, ApiResponse } from '@/types';
 
+// Force dynamic rendering - no caching
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET() {
   try {
-    console.log('API: Fetching content from Supabase...');
+    console.log('[API GET] Fetching content from Supabase...');
     const content = await getContent();
-    console.log('API: Content fetched successfully');
+    console.log('[API GET] Content fetched successfully - Profile:', content.profile.name, 'Social Links:', content.socialLinks.length, 'Videos:', content.videos.length, 'Products:', content.products.length);
     
     const response: ApiResponse<ContentData> = {
       success: true,
@@ -25,7 +29,7 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error('API: Error fetching content:', error);
+    console.error('[API GET] Error fetching content:', error);
     const errorMessage = error instanceof Error ? error.message : 'Failed to fetch content';
     const response: ApiResponse = {
       success: false,

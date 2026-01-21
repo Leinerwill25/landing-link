@@ -26,26 +26,53 @@ function isSupabaseConfigured(): boolean {
   );
 }
 
+// Helper function to parse JSON fields from Supabase
+function parseJsonField(field: any, defaultValue: any) {
+  if (field === null || field === undefined) {
+    console.log('[parseJsonField] Field is null/undefined, using default');
+    return defaultValue;
+  }
+  
+  // If it's already an object/array, return it
+  if (typeof field !== 'string') {
+    console.log('[parseJsonField] Field is already parsed:', typeof field, Array.isArray(field) ? `(array with ${field.length} items)` : '');
+    return field;
+  }
+  
+  // If it's a string, try to parse it
+  try {
+    const parsed = JSON.parse(field);
+    console.log('[parseJsonField] Successfully parsed string to:', typeof parsed, Array.isArray(parsed) ? `(array with ${parsed.length} items)` : '');
+    return parsed;
+  } catch (e) {
+    console.warn('[parseJsonField] Failed to parse JSON field:', e, 'Field value:', field?.substring(0, 100));
+    return defaultValue;
+  }
+}
+
 export async function getContent(): Promise<ContentData> {
   // Always try Supabase first if configured
   if (isSupabaseConfigured()) {
-    console.log('Reading from Supabase with ID:', CONTENT_ID);
+    console.log('[getContent] Reading from Supabase with ID:', CONTENT_ID);
     try {
       const supabase = getSupabaseClient();
       if (!supabase) {
-        console.error('Supabase client is null despite being configured');
+        console.error('[getContent] Supabase client is null despite being configured');
         throw new Error('Supabase client initialization failed');
       }
 
+      // Fetch all fields from content table
       const { data, error } = await supabase
         .from('content')
-        .select('profile, social_links, videos, products')
+        .select('profile, social_links, videos, products, updated_at')
         .eq('id', CONTENT_ID)
         .single();
+      
+      console.log('[getContent] Supabase response - Error:', error?.message || 'none', 'Has data:', !!data);
 
       // PGRST116 = no rows returned (record doesn't exist yet)
       if (error && error.code === 'PGRST116') {
-        console.log('No content found in Supabase for ID:', CONTENT_ID);
+        console.log('[getContent] No content found in Supabase for ID:', CONTENT_ID);
         return {
           profile: { name: '', bio: '', avatar: '' },
           socialLinks: [],
@@ -55,50 +82,44 @@ export async function getContent(): Promise<ContentData> {
       }
 
       if (error) {
-        console.error('Error fetching from Supabase:', error);
+        console.error('[getContent] Error fetching from Supabase:', error);
         throw error;
       }
 
       // Return data from Supabase
       if (data) {
-        console.log('Successfully fetched data from Supabase');
-        
-        // Parse JSON strings if they come as strings (Supabase sometimes returns JSONB as strings)
-        const parseJsonField = (field: any, defaultValue: any) => {
-          if (field === null || field === undefined) return defaultValue;
-          
-          // If it's already an object/array, return it
-          if (typeof field !== 'string') {
-            return field;
-          }
-          
-          // If it's a string, try to parse it
-          try {
-            const parsed = JSON.parse(field);
-            return parsed;
-          } catch (e) {
-            console.warn('Failed to parse JSON field:', e, 'Field value:', field);
-            return defaultValue;
-          }
-        };
+        console.log('[getContent] Successfully fetched data from Supabase');
+        console.log('[getContent] Raw data types - profile:', typeof data.profile, 'social_links:', typeof data.social_links);
+        console.log('[getContent] Raw social_links preview:', typeof data.social_links === 'string' ? data.social_links.substring(0, 200) : JSON.stringify(data.social_links).substring(0, 200));
 
         const profile = parseJsonField(data.profile, { name: '', bio: '', avatar: '' });
-        const socialLinks = parseJsonField(data.social_links, []);
+        let socialLinks = parseJsonField(data.social_links, []);
         const videos = parseJsonField(data.videos, []);
         const products = parseJsonField(data.products, []);
 
-        console.log('Parsed content - Profile:', profile.name, 'Links:', socialLinks.length, 'Videos:', videos.length, 'Products:', products.length);
+        // Ensure socialLinks is always an array
+        if (!Array.isArray(socialLinks)) {
+          console.warn('[getContent] socialLinks is not an array, converting...', typeof socialLinks);
+          socialLinks = [];
+        }
+
+        console.log('[getContent] Parsed content - Profile:', profile.name, 'Links:', socialLinks.length, 'Videos:', videos.length, 'Products:', products.length);
+        if (socialLinks.length > 0) {
+          console.log('[getContent] Social links details:', JSON.stringify(socialLinks.map(l => ({ id: l.id, title: l.title, url: l.url })), null, 2));
+        } else {
+          console.warn('[getContent] No social links found in data!');
+        }
 
         return {
           profile: profile,
           socialLinks: socialLinks,
-          videos: videos,
-          products: products,
+          videos: Array.isArray(videos) ? videos : [],
+          products: Array.isArray(products) ? products : [],
         };
       }
 
       // If no data but no error, return empty
-      console.log('No data returned from Supabase query');
+      console.log('[getContent] No data returned from Supabase query');
       return {
         profile: { name: '', bio: '', avatar: '' },
         socialLinks: [],
