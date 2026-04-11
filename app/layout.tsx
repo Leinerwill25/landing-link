@@ -3,8 +3,14 @@ import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export const metadata: Metadata = {
-  title: "Professional Links | Portal Profesional",
+  title: "ASHIRA LINKS",
   description: "Portal profesional elegante y corporativo para gestión de enlaces, servicios y contenido multimedia",
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+    shortcut: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
